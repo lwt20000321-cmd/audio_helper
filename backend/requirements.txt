@@ -6,6 +6,9 @@ pydantic-settings>=2.3.0
 python-dotenv>=1.0.0
 httpx>=0.27.0
 
+# multipart/form-data 解析（POST /upload 依赖，FastAPI/Starlette 运行时必需）
+python-multipart>=0.0.9
+
 # 音频容器/时长校验（PyAV 自带编译好的 FFmpeg 库，无需系统安装 ffmpeg）
 # 约 50 MB，首次安装较慢，属正常现象
 av>=12.0.0
