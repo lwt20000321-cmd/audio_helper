@@ -5,7 +5,17 @@
 """
 
 from functools import lru_cache
+
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+def _clean_env_str(value: str) -> str:
+    """去掉首尾空白、换行，以及整段被引号包裹的情况。"""
+    cleaned = value.strip().strip("\ufeff")
+    if len(cleaned) >= 2 and cleaned[0] == cleaned[-1] and cleaned[0] in {'"', "'"}:
+        cleaned = cleaned[1:-1].strip()
+    return cleaned.replace("\r", "").replace("\n", "")
 
 
 class Settings(BaseSettings):
@@ -45,6 +55,30 @@ class Settings(BaseSettings):
     # ── 存储与有效期 ─────────────────────────────────────
     storage_dir: str = "storage"
     audio_expire_seconds: int = 86400
+
+    @field_validator(
+        "bailian_api_key",
+        "bailian_base_url",
+        "bailian_compatible_url",
+        "bailian_tts_url",
+        "deepseek_api_key",
+        "deepseek_base_url",
+        "amap_api_key",
+        "amap_geocode_url",
+        "amap_poi_url",
+        "asr_model",
+        "tts_model",
+        "tts_voice",
+        "extract_model",
+        "finalize_model",
+        "storage_dir",
+        mode="before",
+    )
+    @classmethod
+    def _strip_env_strings(cls, value: object) -> object:
+        if isinstance(value, str):
+            return _clean_env_str(value)
+        return value
 
 
 @lru_cache

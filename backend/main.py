@@ -13,6 +13,8 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from api.asr import router as asr_router
+from api.extract import router as extract_router
 from api.health import router as health_router
 from api.upload import router as upload_router
 from config import get_settings
@@ -135,6 +137,8 @@ async def validation_error_handler(
 # ── 路由注册 ──────────────────────────────────────────────
 app.include_router(health_router)
 app.include_router(upload_router)
+app.include_router(asr_router)
+app.include_router(extract_router)
 
 
 # ── 本地直接运行入口 ───────────────────────────────────────
