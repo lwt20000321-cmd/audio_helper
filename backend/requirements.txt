@@ -1,0 +1,15 @@
+# ── Runtime ───────────────────────────────────────────────
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.7.0
+pydantic-settings>=2.3.0
+python-dotenv>=1.0.0
+httpx>=0.27.0
+
+# 音频容器/时长校验（PyAV 自带编译好的 FFmpeg 库，无需系统安装 ffmpeg）
+# 约 50 MB，首次安装较慢，属正常现象
+av>=12.0.0
+
+# ── Testing ───────────────────────────────────────────────
+pytest>=8.0.0
+pytest-asyncio>=0.23.0

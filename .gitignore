@@ -1,0 +1,33 @@
+# ── Python ────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# ── Env / Secrets ─────────────────────────────────────────
+.env
+*.env.local
+
+# ── Storage（临时音频与查询结果，保留目录结构）─────────────
+backend/storage/audio/*
+backend/storage/search/*
+!backend/storage/audio/.gitkeep
+!backend/storage/search/.gitkeep
+
+# ── Node ──────────────────────────────────────────────────
+node_modules/
+frontend/dist/
+frontend/.cache/
+
+# ── macOS / IDE ───────────────────────────────────────────
+.DS_Store
+.vscode/
+.idea/
+.cursor/

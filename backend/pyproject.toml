@@ -1,0 +1,6 @@
+[tool.pytest.ini_options]
+# 从 backend/ 目录运行 pytest 时，将当前目录（backend/）加入 sys.path
+# 保证 "from main import app" 等直接导入可以找到模块
+pythonpath = ["."]
+testpaths = ["tests"]
+asyncio_mode = "auto"
